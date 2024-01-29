@@ -1,0 +1,7 @@
+{
+  "extends": ["../../.eslintrc.json"],
+  "parserOptions": {
+    "project": ["./packages/backend/tsconfig.json"]
+  },
+  "ignorePatterns": ["!**/*", "webpack.config.cjs"]
+}

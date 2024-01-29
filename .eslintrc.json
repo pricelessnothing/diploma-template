@@ -1,0 +1,80 @@
+{
+  "root": true,
+  "env": {
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nx/eslint-plugin", "prettier", "@typescript-eslint", "import"],
+  "parserOptions": {
+    "project": ["tsconfig.base.json"]
+  },
+  "rules": {
+    "lines-between-class-members": ["warn", "always"],
+    "no-return-await": ["warn"],
+    "no-throw-literal": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "off",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "caughtErrorsIgnorePattern": "^_"
+          }
+        ],
+        "import/no-useless-path-segments": ["warn", { "noUselessIndex": true }],
+        "import/no-empty-named-blocks": ["warn"],
+        "import/newline-after-import": ["warn", { "considerComments": true }]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {
+        "@typescript-eslint/no-inferrable-types": "off"
+      },
+      "settings": {
+        "import/resolver": {
+          "typescript": {
+            "project": "tsconfig.base.json"
+          }
+        },
+        "parser": "@typescript-eslint/parser",
+        "parserOptions": {
+          "project": "./tsconfig.base.json",
+          "tsconfigRootDir": "./"
+        }
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {}
+    }
+  ]
+}
