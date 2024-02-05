@@ -1,0 +1,12 @@
+.container {
+  padding: 1em;
+}
+
+.item {
+  background: #b7c2bf;
+  padding: 1em;
+
+  &:not(:last-child) {
+    margin-bottom: .5em;
+  }
+}

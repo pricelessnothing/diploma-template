@@ -1,4 +1,5 @@
 import { filesApi } from "@diploma/frontend/api/files.api";
+import { FileList } from "@diploma/frontend/view/components/file-list/file-list.component";
 import { FC, useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -23,7 +24,7 @@ export const HomePage: FC = () => {
           </li>
         ))}
       </ul>
-      <pre>{JSON.stringify(files, null, 2)}</pre>
+      <FileList files={files ?? []} />
     </>
   );
 };
