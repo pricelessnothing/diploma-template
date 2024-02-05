@@ -4,6 +4,8 @@ import { HomePage } from "./pages/home/home.component";
 import { MainLayout } from "./layout/layout.component";
 import { IdPage } from "./pages/id/id.component";
 
+import "./app.styles.scss";
+
 export const App: FC = () => {
   return (
     <BrowserRouter>
