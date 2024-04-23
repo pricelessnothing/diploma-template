@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { readdirSync } from "fs";
 
-const DIR_NAME = process.cwd();
+const DIR_NAME = "data";
 
 @Injectable()
 export class FilesService {

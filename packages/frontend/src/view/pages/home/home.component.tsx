@@ -1,7 +1,10 @@
 import { filesApi } from "@diploma/frontend/api/files.api";
-import { FileList } from "@diploma/frontend/view/components/file-list/file-list.component";
+
+// import { FileList } from "@diploma/frontend/view/components/file-list/file-list.component";
 import { FC, useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import styles from "./home.module.scss";
 
 export const HomePage: FC = () => {
   const [files, setFiles] = useState<string[]>();
@@ -17,14 +20,27 @@ export const HomePage: FC = () => {
 
   return (
     <>
-      <ul>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(id => (
-          <li key={id}>
-            <Link to={`/${id}`}>Что-то с ID={id}</Link>
-          </li>
-        ))}
-      </ul>
-      <FileList files={files ?? []} />
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Ссылка</th>
+          </tr>
+        </thead>
+        <tbody>
+          {files?.map(filename => (
+            <tr>
+              <td>
+                <p>{filename}</p>
+              </td>
+              <td>
+                <Link to={`/${filename}`}>Подробнее</Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {/* <FileList files={files ?? []} /> */}
     </>
   );
 };
