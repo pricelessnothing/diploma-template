@@ -11,6 +11,6 @@
     "target": "ESNext"
   },
   "files": [],
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx", "vite.config.ts", "vite-env.d.ts"],
   "extends": "../../tsconfig.base.json"
 }
