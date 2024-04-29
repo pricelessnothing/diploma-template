@@ -1,7 +1,5 @@
 import { Controller, Get, Param } from "@nestjs/common";
 import { FilesService } from "./files.service";
-import { readFileSync } from "fs";
-import { XMLParser } from "fast-xml-parser";
 
 @Controller("files")
 export class FilesController {
@@ -13,10 +11,16 @@ export class FilesController {
   }
 
   @Get(":fileId/meta")
-  findOne(@Param("fileId") fileId: string): string {
-    const xmlData = readFileSync(`data/${fileId}/${fileId}.xml`, "utf8");
-    const parser = new XMLParser();
-    const jObj = parser.parse(xmlData);
-    return jObj;
+  getFileMeta(@Param("fileId") fileId: string): Record<string, unknown> {
+    return this.filesService.getFileMeta(fileId);
   }
+
+  //что-то странное на проверку #5
+
+  @Get(":imgId/img")
+  getImgPath(@Param("imgId") imgId: string) {
+    return this.filesService.getImgPath(imgId);
+  }
+
+  //
 }

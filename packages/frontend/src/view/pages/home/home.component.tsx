@@ -23,7 +23,7 @@ export const HomePage: FC = () => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Имя</th>
+            <th>Имя снимка</th>
             <th>Ссылка</th>
           </tr>
         </thead>
