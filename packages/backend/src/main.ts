@@ -1,5 +1,7 @@
 import "reflect-metadata";
-import { INestApplication } from "@nestjs/common";
+
+// import { INestApplication } from "@nestjs/common";
+import { NestExpressApplication } from "@nestjs/platform-express";
 import { CorsOptionsCallback } from "@nestjs/common/interfaces/external/cors-options.interface";
 import { NestFactory } from "@nestjs/core";
 
@@ -10,7 +12,8 @@ import { AppModule } from "@diploma/backend/app/app.module";
 export const APP_PORT = 3000;
 
 async function bootstrap(): Promise<void> {
-  const app: INestApplication = await NestFactory.create(AppModule);
+  // const app: INestApplication = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   const error: unknown = undefined;
   app.enableCors((req: Request, cb: CorsOptionsCallback): void =>
@@ -19,6 +22,8 @@ async function bootstrap(): Promise<void> {
       credentials: true,
     }),
   );
+
+  app.useStaticAssets("data");
 
   await app.listen(APP_PORT);
 

@@ -16,6 +16,16 @@ class FilesApi {
 
     return data;
   }
+
+  //что-то странное на проверку #5
+
+  async getImgPath(imgId: string) {
+    const { data } = await apiClient.get<string[]>(`data/${imgId}/img`);
+
+    return data;
+  }
+
+  //
 }
 
 export const filesApi = new FilesApi();

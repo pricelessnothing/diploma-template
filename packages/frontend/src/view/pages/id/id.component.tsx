@@ -18,6 +18,21 @@ export const IdPage: FC = () => {
     void requestFileMeta();
   }, [requestFileMeta]);
 
+  //что-то странное на проверку #5
+
+  const [img, setImg] = useState<string[]>();
+
+  const requestImg = useCallback(async () => {
+    const img = await filesApi.getImgPath(id!);
+    setImg(img);
+  }, [id]);
+
+  useEffect(() => {
+    void requestImg();
+  }, [requestImg]);
+
+  //
+
   return (
     <>
       <Link to="/">К списку</Link>
@@ -28,7 +43,7 @@ export const IdPage: FC = () => {
             if (typeof value !== "object") {
               return (
                 <tr>
-                  <td>
+                  <td className={styles.td}>
                     <p>{key}</p>
                   </td>
                   <td>
@@ -40,12 +55,14 @@ export const IdPage: FC = () => {
               return (
                 <>
                   <tr>
-                    <td colSpan={2}>{key}</td>
+                    <td colSpan={2} className={styles.td}>
+                      <p>{key}</p>
+                    </td>
                   </tr>
                   {Object.entries(value as Record<string, any>).map(([key, value]) => {
                     return (
                       <tr>
-                        <td>
+                        <td className={styles.td}>
                           <p>{key}</p>
                         </td>
                         <td>
