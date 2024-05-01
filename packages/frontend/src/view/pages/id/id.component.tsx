@@ -20,11 +20,11 @@ export const IdPage: FC = () => {
 
   //что-то странное на проверку #5
 
-  const [img, setImg] = useState<string[]>();
+  const [imgData, setImg] = useState<string[]>();
 
   const requestImg = useCallback(async () => {
-    const img = await filesApi.getImgPath(id!);
-    setImg(img);
+    const imgData = await filesApi.getImgPath(id!);
+    setImg(imgData);
   }, [id]);
 
   useEffect(() => {
@@ -35,7 +35,9 @@ export const IdPage: FC = () => {
 
   return (
     <>
-      <Link to="/">К списку</Link>
+      <p className={styles.pLink}>
+        <Link to="/">К списку</Link>
+      </p>
       <p className={styles.p}>Снимок: {id}</p>
       <table className={styles.table}>
         <tbody>

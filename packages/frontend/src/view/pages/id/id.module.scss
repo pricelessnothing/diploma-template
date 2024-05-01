@@ -1,10 +1,17 @@
-.p
-{
+.p {
     text-align: center;
 }
 
-.table
-  {
+.pLink {
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px #000000;
+  margin: 10px;
+  padding: 5px;
+  width: 100px;
+  background-color: #8bd7a558;
+}
+
+.table {
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
@@ -19,8 +26,7 @@
   }
 }
 
-.td
-  {
+.td {
     font-weight: bold;
-    background-color:rgba(186, 186, 185, 0.636);
+    background-color:#babab97e;
   }
