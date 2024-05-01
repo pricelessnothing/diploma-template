@@ -1,15 +1,20 @@
 .header {
-  background: #aae7c9;
-  font-size: 2rem;
+  background: #3fb479;
+  font-size: 1.25rem;
   padding: 1em;
+  font-family: 'Montserrat';
+  font-weight: 500;
 }
 
 .layout__main {
   flex: 1;
   padding: 2em;
+  font-family: 'Montserrat';
 }
 
 .footer {
+  background: #297951;
   padding: 1em;
-  background: #aabae7;
+  font-family: 'Montserrat';
+  text-align: center;
 }
