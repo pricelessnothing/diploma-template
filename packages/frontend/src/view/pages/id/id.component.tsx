@@ -18,8 +18,6 @@ export const IdPage: FC = () => {
     void requestFileMeta();
   }, [requestFileMeta]);
 
-  //что-то странное на проверку #5
-
   const [imgData, setImg] = useState<string[]>();
 
   const requestImg = useCallback(async () => {
@@ -31,7 +29,31 @@ export const IdPage: FC = () => {
     void requestImg();
   }, [requestImg]);
 
-  //
+  const [imgCloud, setImgCloud] = useState<string[]>();
+
+  const requestImgCloud = useCallback(async () => {
+    const imgCloud = await filesApi.getImgCloudPath(id!);
+    setImgCloud(imgCloud);
+  }, [id]);
+
+  useEffect(() => {
+    void requestImgCloud();
+  }, [requestImgCloud]);
+
+  const [imgFog, setImgFog] = useState<string[]>();
+
+  const requestImgFog = useCallback(async () => {
+    const imgFog = await filesApi.getImgFogPath(id!);
+    setImgFog(imgFog);
+  }, [id]);
+
+  useEffect(() => {
+    void requestImgFog();
+  }, [requestImgFog]);
+
+  const [isCloudEnabled, setIsCloudEnabled] = useState(false);
+  const [isFogEnabled, setIsFogEnabled] = useState(false);
+  const [isAdminEnabled, setIsAdminEnabled] = useState(false);
 
   return (
     <>
@@ -39,6 +61,32 @@ export const IdPage: FC = () => {
         <Link to="/">К списку</Link>
       </p>
       <p className={styles.p}>Снимок: {id}</p>
+      <div className={styles.container}>
+        {imgData?.map((imgPath, i) => (
+          <div className={styles.divImg}>
+            <img src={`http://localhost:3000/${imgPath}`} alt="pic" height={150} width={100} />
+            {isCloudEnabled && (
+              <img src={`http://localhost:3000/${imgCloud?.[i]}`} alt="pic" height={150} width={100} />
+            )}
+            {isFogEnabled && <img src={`http://localhost:3000/${imgFog?.[i]}`} alt="pic" height={150} width={100} />}
+          </div>
+        ))}
+      </div>
+      <div className={styles.divCheckbox}>
+        <label>Маски:</label>
+        <label>
+          <input type="checkbox" checked={isCloudEnabled} onChange={e => setIsCloudEnabled(e.target.checked)} />
+          Облака
+        </label>
+        <label>
+          <input type="checkbox" checked={isFogEnabled} onChange={e => setIsFogEnabled(e.target.checked)} />
+          Туман
+        </label>
+        <label>
+          <input type="checkbox" checked={isAdminEnabled} onChange={e => setIsAdminEnabled(e.target.checked)} />
+          Админ
+        </label>
+      </div>
       <table className={styles.table}>
         <tbody>
           {Object.entries(fileMeta).map(([key, value]) => {
@@ -49,7 +97,8 @@ export const IdPage: FC = () => {
                     <p>{key}</p>
                   </td>
                   <td>
-                    <p>{value}</p>
+                    {isAdminEnabled && <input type="text" className={styles.inputText} value={value}></input>}
+                    {!isAdminEnabled && <p>{value}</p>}
                   </td>
                 </tr>
               );
@@ -68,7 +117,8 @@ export const IdPage: FC = () => {
                           <p>{key}</p>
                         </td>
                         <td>
-                          <p>{value}</p>
+                          {isAdminEnabled && <input type="text" className={styles.inputText} value={value}></input>}
+                          {!isAdminEnabled && <p>{value}</p>}
                         </td>
                       </tr>
                     );

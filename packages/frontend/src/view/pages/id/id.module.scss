@@ -18,6 +18,7 @@
     padding: 5px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 10px;
     th, td {
       border: 1px solid black;
       border-collapse: collapse;
@@ -30,3 +31,49 @@
     font-weight: bold;
     background-color:#babab97e;
   }
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  width: 400px;
+  height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.divImg {
+  position: relative;
+  width: 100px;
+  height: 150px;
+  &>img {
+    position: absolute;
+    mix-blend-mode: multiply;
+  }
+}
+
+.divImgCloud {
+  display: flex;
+  position: absolute;
+}
+
+.divCheckbox {
+  display: flex;
+  flex-flow: row wrap;
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  &>label {
+    margin-left: 10px;
+    &>input {
+      margin-right: 3px;
+      margin-right: 3px;
+    }
+  }
+}
+
+.inputText {
+  width: 350px;
+  text-align: center;
+}

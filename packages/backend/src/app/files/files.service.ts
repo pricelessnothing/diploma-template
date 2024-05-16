@@ -17,8 +17,6 @@ export class FilesService {
     return jObj;
   }
 
-  //что-то странное на проверку #5
-
   getImgPath(imgId: string) {
     const numberOfImg = [
       "01",
@@ -47,5 +45,59 @@ export class FilesService {
     return imgPathArr;
   }
 
-  //
+  getImgCloudPath(imgId: string) {
+    const numberOfImg = [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+    ];
+
+    const imgCloudPathArr = [];
+
+    for (let i = 0; i < numberOfImg.length; i++) {
+      imgCloudPathArr[i] = `${imgId}/png/${imgId}_${numberOfImg[i]}/mask_cloud/${imgId}_${numberOfImg[i]}_cloud.png`;
+    }
+    return imgCloudPathArr;
+  }
+
+  getImgFogPath(imgId: string) {
+    const numberOfImg = [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+    ];
+
+    const imgFogPathArr = [];
+
+    for (let i = 0; i < numberOfImg.length; i++) {
+      imgFogPathArr[i] = `${imgId}/png/${imgId}_${numberOfImg[i]}/mask_fog/${imgId}_${numberOfImg[i]}_fog.png`;
+    }
+    return imgFogPathArr;
+  }
 }

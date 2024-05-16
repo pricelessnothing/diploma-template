@@ -17,15 +17,23 @@ class FilesApi {
     return data;
   }
 
-  //что-то странное на проверку #5
-
   async getImgPath(imgId: string) {
-    const { data } = await apiClient.get<string[]>(`data/${imgId}/img`);
+    const { data } = await apiClient.get<string[]>(`files/${imgId}/img`);
 
     return data;
   }
 
-  //
+  async getImgCloudPath(imgId: string) {
+    const { data } = await apiClient.get<string[]>(`files/${imgId}/cloud`);
+
+    return data;
+  }
+
+  async getImgFogPath(imgId: string) {
+    const { data } = await apiClient.get<string[]>(`files/${imgId}/fog`);
+
+    return data;
+  }
 }
 
 export const filesApi = new FilesApi();
