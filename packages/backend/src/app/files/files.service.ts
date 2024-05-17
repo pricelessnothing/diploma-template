@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { readdirSync, readFileSync } from "fs";
-import { XMLParser } from "fast-xml-parser";
+import { readdirSync, readFileSync, writeFileSync } from "fs";
+import { XMLParser, XMLBuilder } from "fast-xml-parser";
 
 const DIR_NAME = "data";
 
@@ -15,6 +15,18 @@ export class FilesService {
     const parser = new XMLParser();
     const jObj = parser.parse(xmlData) as Record<string, unknown>;
     return jObj;
+  }
+
+  updateFileMeta(fileId: string, _body: Record<string, any>) {
+    const xmlData = readFileSync(`data/${fileId}/${fileId}.xml`, "utf8");
+    const parser = new XMLParser();
+    const jObj = parser.parse(xmlData) as Record<string, any>;
+    jObj.SPP_ROOT = _body;
+    const builder = new XMLBuilder();
+    const xmlContent = builder.build(jObj) as string;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    console.log(typeof xmlContent);
+    return writeFileSync(`data/${fileId}/${fileId}.xml`, xmlContent);
   }
 
   getImgPath(imgId: string) {

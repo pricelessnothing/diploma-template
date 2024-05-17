@@ -1,6 +1,6 @@
 import { apiClient } from "@diploma/frontend/api/_client";
 
-type FileMetaResponsePayload = {
+type FileMetaPayload = {
   SPP_ROOT: Record<string, any>;
 };
 
@@ -12,7 +12,7 @@ class FilesApi {
   }
 
   async getFileMeta(fileId: string) {
-    const { data } = await apiClient.get<FileMetaResponsePayload>(`files/${fileId}/meta`);
+    const { data } = await apiClient.get<FileMetaPayload>(`files/${fileId}/meta`);
 
     return data;
   }
@@ -31,6 +31,12 @@ class FilesApi {
 
   async getImgFogPath(imgId: string) {
     const { data } = await apiClient.get<string[]>(`files/${imgId}/fog`);
+
+    return data;
+  }
+
+  async updateFileMeta(fileId: string, value: any) {
+    const { data } = await apiClient.post<FileMetaPayload>(`files/${fileId}/meta`, value);
 
     return data;
   }
