@@ -97,7 +97,20 @@ export const IdPage: FC = () => {
                     <p>{key}</p>
                   </td>
                   <td>
-                    {isAdminEnabled && <input type="text" className={styles.inputText} value={value}></input>}
+                    {isAdminEnabled && (
+                      <input
+                        type="text"
+                        className={styles.inputText}
+                        value={value as string}
+                        onChange={e =>
+                          setFileMeta(meta => ({
+                            ...meta,
+                            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                            [key]: e.target.value,
+                          }))
+                        }
+                      ></input>
+                    )}
                     {!isAdminEnabled && <p>{value}</p>}
                   </td>
                 </tr>
@@ -110,15 +123,31 @@ export const IdPage: FC = () => {
                       <p>{key}</p>
                     </td>
                   </tr>
-                  {Object.entries(value as Record<string, any>).map(([key, value]) => {
+                  {Object.entries(value as Record<string, string>).map(([innerKey, innerValue]) => {
                     return (
                       <tr>
                         <td className={styles.td}>
-                          <p>{key}</p>
+                          <p>{innerKey}</p>
                         </td>
                         <td>
-                          {isAdminEnabled && <input type="text" className={styles.inputText} value={value}></input>}
-                          {!isAdminEnabled && <p>{value}</p>}
+                          {isAdminEnabled && (
+                            <input
+                              type="text"
+                              value={innerValue}
+                              className={styles.inputText}
+                              onChange={e =>
+                                setFileMeta(meta => ({
+                                  ...meta,
+                                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                                  [key]: {
+                                    ...meta[key],
+                                    [innerKey]: e.target.value,
+                                  },
+                                }))
+                              }
+                            ></input>
+                          )}
+                          {!isAdminEnabled && <p>{innerValue}</p>}
                         </td>
                       </tr>
                     );
@@ -129,6 +158,16 @@ export const IdPage: FC = () => {
           })}
         </tbody>
       </table>
+      <label>
+        {isAdminEnabled && (
+          <input
+            type="button"
+            value="Сохранить"
+            className={styles.inputBtnSave}
+            onClick={() => void filesApi.updateFileMeta(id!, fileMeta)}
+          ></input>
+        )}
+      </label>
     </>
   );
 };

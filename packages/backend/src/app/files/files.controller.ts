@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Controller, Get, Param, Post, Body } from "@nestjs/common";
 import { FilesService } from "./files.service";
 
 @Controller("files")
@@ -28,5 +28,10 @@ export class FilesController {
   @Get(":imgId/fog")
   getImgFogPath(@Param("imgId") imgId: string) {
     return this.filesService.getImgFogPath(imgId);
+  }
+
+  @Post(":fileId/meta")
+  createPost(@Body() body: Record<string, any>, @Param("fileId") fileId: string) {
+    this.filesService.updateFileMeta(fileId, body);
   }
 }
