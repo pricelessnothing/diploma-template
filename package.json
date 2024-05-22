@@ -17,7 +17,8 @@
     "fast-xml-parser": "4.3.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "6.21.3"
+    "react-router-dom": "6.21.3",
+    "zustand": "4.5.2"
   },
   "devDependencies": {
     "@nestjs/swagger": "7.2.0",
